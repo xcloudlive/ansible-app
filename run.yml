@@ -1,0 +1,45 @@
+---
+- hosts: localhost
+  # force_handlers: true
+  vars:
+    contents: "{{ lookup('file', './result.json') }}"
+  tasks:
+    # - name: Download JSON content play
+    #   uri:
+    #     url: https://jsonplaceholder.typicode.com/users
+    #     # username: user
+    #     # password: passwd
+    #     # force_basic_auth: yes
+    #     return_content: yes
+    #   register: jsoncontent
+    
+    - name: Business Card
+      debug: msg="{{ contents | json_query(jmesquery) }}"
+      register: results
+      vars:
+        jmesquery: "length([*].{Name: name, Email: email, Phone: phone, CompanyName: company.name, WebSite: website, City: address.city})"
+    
+    
+    - fail:
+        msg: The system may not be provisioned
+      when:   results.msg|int  > 0  
+      ignore_errors: yes
+    - debug: var=ansible_default_ipv4.address
+    - name: get result of message
+      set_fact:
+        # test_status: "ok"
+        test_status: "{{ 'error' if (results.msg|int > 0) else 'ok' }}"
+      # when: results.msg|int >= 0
+    - name: show debug info
+      debug:
+        msg: "{{ test_status }}"
+    - debug: 
+        msg: "{{ lookup('pipe','date \"+%Y-%m-%d %H:%M:%S\"') }}"
+    - name: Save results
+      shell: "echo {{cur_time}}: URL: {{hostvars[inventory_hostname]['ansible_nodename']}} RECORDCOUNT: {{results}} BASE VERSION: {{test_status}} >> result-{{ansible_date_time.date}}.txt " 
+      vars:
+        cur_time: "{{ lookup('pipe','date \"+%Y-%m-%d %H:%M:%S\"') }}"
+      # shell: "echo {{ansible_Date_time.date}} URL: {{hostvars[inventory_hostname]['ansible_nodename']}} RECORDCOUNT: {{results.stdout}} BASE VERSION: {{test_status}} >> result.txt " 
+      delegate_to: localhost
+      # vars:
+      #  results: hello
