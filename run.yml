@@ -3,6 +3,8 @@
   # force_handlers: true
   vars:
     contents: "{{ lookup('file', './result.json') }}"
+  vars_files:
+    - vars.yml  
   tasks:
     # - name: Download JSON content play
     #   uri:
@@ -12,7 +14,8 @@
     #     # force_basic_auth: yes
     #     return_content: yes
     #   register: jsoncontent
-    
+    - debug:
+        msg: "{{host_addr}}"
     - name: Business Card
       debug: msg="{{ contents | json_query(jmesquery) }}"
       register: results
