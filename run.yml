@@ -1,8 +1,7 @@
 ---
 - hosts: localhost
   # force_handlers: true
-  vars:
-    contents: "{{ lookup('file', './result.json') }}"
+  # gather_facts: no
   vars_files:
     - vars.yml  
   tasks:
@@ -14,50 +13,19 @@
     #     # force_basic_auth: yes
     #     return_content: yes
     #   register: jsoncontent
-    - name: read csv file
+    - name: read csv file to get host info
       read_csv:
         path: host.csv
         fieldnames: ip,username,password
       register: hosts
       delegate_to: localhost  
-    - debug:
-        msg: "{{ item.ip }} is {{ item.username }}"
-      with_items: "{{hosts.list}}"
-    - debug:
-        msg: "{{host_addr}}"
-    - name: Business Card
-      debug: msg="{{ contents | json_query(jmesquery) }}"
-      register: results
-      vars:
-        jmesquery: "length([*].{Name: name, Email: email, Phone: phone, CompanyName: company.name, WebSite: website, City: address.city})"
-    - name: get result of message
-      set_fact:
-        # test_status: "ok"
-        test_status: "{{ 'error' if (results.msg|int > 0) else 'ok' }}"
-      # when: results.msg|int >= 0
-    
-    - name: check result 
-      block:
-        - fail:
-            msg: The system may not be provisioned
-          when:   results.msg|int  > 0
-      always:
-        - name: Save results
-          shell: "echo {{cur_time}}: URL: {{hostvars[inventory_hostname]['ansible_nodename']}} RECORDCOUNT: {{results}} BASE VERSION: {{test_status}} >> result-{{ansible_date_time.date}}.txt " 
-          vars:
-            cur_time: "{{ lookup('pipe','date \"+%Y-%m-%d %H:%M:%S\"') }}"
-        # shell: "echo {{ansible_Date_time.date}} URL: {{hostvars[inventory_hostname]['ansible_nodename']}} RECORDCOUNT: {{results.stdout}} BASE VERSION: {{test_status}} >> result.txt " 
-          delegate_to: localhost
-      # vars:
-      #  results: hello
-      # notify: Save results  
+
+    - name: loop to call redfish rest service
+      include_role:
+        name: audit
+      with_items: "{{ hosts.list }}"
+      loop_control:
+        loop_var: item
       # ignore_errors: yes
-    - debug: var=ansible_default_ipv4.address
-    
-    - name: show debug info
-      debug:
-        msg: "{{ test_status }}"
-    - debug: 
-        msg: "{{ lookup('pipe','date \"+%Y-%m-%d %H:%M:%S\"') }}"
-  # handlers:
+
     
