@@ -23,7 +23,7 @@
     - name: loop for get detail of service
       fail: 
         msg: "{{ item.name }} is not in status {{ item.status }}" 
-      when: services_state.ansible_facts.services[item.name] is not defined and services_state.ansible_facts.services[item.name].state != item.status
+      when:  item.name is not in services_state.ansible_facts.services and services_state.ansible_facts.services[item.name].state != item.status
       ignore_errors: true
       with_items: "{{ service_list }}"
     
