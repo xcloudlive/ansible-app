@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  gather_facts: false
+  vars:
+    param: 80
+    users:
+      age:  
+        state: "running"
+        sdfd: "dfdf"
+      error:  
+        state: "running"
+        sdfd: "dfdf"
+    its: 
+      - name: age12
+        status: running
+      - name: error
+        status: running
+  tasks:
+    - name: testing
+      debug:
+        msg: "error is happy"
+      failed_when: 'item.name not in users or users[item.name].state != item.status'
+      with_items: "{{its}}"
+      ignore_errors: true
+    - name: testing
+      assert:
+        that:
+          - param > 0
+          - param > 100
+        fail_msg: no need to do
+        success_msg: ok
