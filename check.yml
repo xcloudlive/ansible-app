@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   vars_files:
     - vars.yml  
   tasks:
@@ -12,11 +12,18 @@
       register: port_check
       ignore_errors: yes
       with_items: "{{ check_port }}"
+
     - name: Gathering service facts
       service_facts:
       register: services_state
-    - debug: var=services_state
-    - debug: 
-        var: services_state.ansible_facts.services[item.name].state
-      with_items: "{{ service_name }}"
+
+    - name: print all of service status
+      debug: var=services_state
+
+    - name: loop for get detail of service
+      fail: 
+        msg: "{{ item.name }} is not in status {{ item.status }}" 
+      when: services_state.ansible_facts.services[item.name].state != item.status
+      ignore_errors: true
+      with_items: "{{ service_list }}"
     

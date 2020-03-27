@@ -2,6 +2,8 @@ host_addr: hello
 check_port:
   - name: "8080"
   - name: "80"
-service_name:
+service_list:
   - name: netconsole
+    status: stopped
   - name: firewalld.service
+    status: running
