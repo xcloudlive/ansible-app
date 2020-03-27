@@ -18,12 +18,12 @@
       register: services_state
 
     - name: print all of service status
-      debug: var=services_state
+      debug: var=services_state.ansible_facts.services
 
     - name: loop for get detail of service
       fail: 
         msg: "{{ item.name }} is not in status {{ item.status }}" 
-      when:  item.name is not in services and services.[item.name].state != item.status
+      when:  item.name is not in services and services[item.name].state != item.status
       vars:
         services: "{{ services_state.ansible_facts.services }}"
       ignore_errors: true
