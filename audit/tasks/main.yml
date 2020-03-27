@@ -25,7 +25,7 @@
 - name: check result 
   block:
     - fail:
-        msg: The system may not be provisioned
+        msg: "The system {{ item.ip }} may have some errors"
       when:   results.msg|int  > 0
   rescue:
     - name: Save results
