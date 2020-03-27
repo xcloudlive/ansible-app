@@ -1,0 +1,21 @@
+---
+- hosts: localhost
+  vars_files:
+    - vars.yml  
+  tasks:
+    - name: Check if port is listening
+      wait_for:
+        port: "{{ item.name }}"
+        delay: 5
+        timeout: 10
+        msg: "Timeout waiting for {{ item.name }} to respond"
+      register: port_check
+      ignore_errors: yes
+      with_items: "{{ port }}"
+    - name: Gathering service facts
+      service_facts:
+      register: services_state
+    - debug: 
+        var: services_state.ansible_facts.services["netconsole"].state
+    - debug: 
+        var: services_state.ansible_facts.services["firewalld.service"].state

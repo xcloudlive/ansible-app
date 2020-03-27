@@ -1,1 +1,4 @@
 host_addr: hello
+port:
+  - name: "8080"
+  - name: "80"
