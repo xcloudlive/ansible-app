@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   # force_handlers: true
   vars:
     contents: "{{ lookup('file', './result.json') }}"
@@ -14,6 +14,15 @@
     #     # force_basic_auth: yes
     #     return_content: yes
     #   register: jsoncontent
+    - name: read csv file
+      read_csv:
+        path: host.csv
+        fieldnames: ip,username,password
+      register: hosts
+      delegate_to: localhost  
+    - debug:
+        msg: "{{ item.ip }} is {{ item.username }}"
+      with_items: "{{hosts.list}}"
     - debug:
         msg: "{{host_addr}}"
     - name: Business Card
