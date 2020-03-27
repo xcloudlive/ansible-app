@@ -3,7 +3,14 @@
 - name: print debug info
   debug:
     msg: "print a ip: {{ item.ip }} ,username {{ item.username }} }"
-
+# - name: Download JSON content play
+#   uri:
+#     url: https://jsonplaceholder.typicode.com/users
+#     # username: user
+#     # password: passwd
+#     # force_basic_auth: yes
+#     return_content: yes
+#   register: jsoncontent
 - name: caculate warning count
   debug: msg="{{ contents | json_query(jmesquery) }}"
   register: results

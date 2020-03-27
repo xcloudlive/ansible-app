@@ -5,14 +5,7 @@
   vars_files:
     - vars.yml  
   tasks:
-    # - name: Download JSON content play
-    #   uri:
-    #     url: https://jsonplaceholder.typicode.com/users
-    #     # username: user
-    #     # password: passwd
-    #     # force_basic_auth: yes
-    #     return_content: yes
-    #   register: jsoncontent
+
     - name: read csv file to get host info
       read_csv:
         path: host.csv
