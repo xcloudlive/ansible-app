@@ -27,6 +27,9 @@
     - fail:
         msg: "The system {{ item.ip }} may have some errors"
       when:   results.msg|int  > 0
+    - debug:
+      msg: "The system {{ item.ip }} works well"
+      when:   results.msg|int  == 0
   rescue:
     - name: Save results
       shell: "echo {{cur_time}}: IP: {{ item.ip }}, result: {{test_status}} >> result-{{ansible_date_time.date}}.txt " 
