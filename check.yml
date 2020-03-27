@@ -21,9 +21,9 @@
       debug: var=services_state.ansible_facts.services
 
     - name: loop for get detail of service
-      fail: 
+      debug:   
         msg: "{{ item.name }} is not in status {{ item.status }}" 
-      when:  item.name not in services or services[item.name].state != item.status
+      failed_when:  item.name not in services or services[item.name].state != item.status
       vars:
         services: "{{ services_state.ansible_facts.services }}"
       ignore_errors: true
