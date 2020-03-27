@@ -1,5 +1,6 @@
 ---
 - hosts: localhost
+  become: true
   vars_files:
     - vars.yml  
   tasks:
@@ -21,9 +22,12 @@
       debug: var=services_state.ansible_facts.services
 
     - name: loop for get detail of service
-      fail: 
-        msg: "{{ item.name }} is not in status {{ item.status }}" 
-      when:  item.name not in services or services[item.name].state != item.status
+      assert: 
+        that:
+          - item.name in services
+          - services[item.name].state == item.status
+        fail_msg: "{{ item.name }} is not in status {{ item.status }}" 
+        succee_msg: "{{ item.name }} is in status {{ item.status }}" 
       vars:
         services: "{{ services_state.ansible_facts.services }}"
       ignore_errors: true
