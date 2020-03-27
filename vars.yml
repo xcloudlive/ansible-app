@@ -1,4 +1,7 @@
 host_addr: hello
-port:
+check_port:
   - name: "8080"
   - name: "80"
+service_name:
+  - name: netconsole
+  - name: firewalld.service
