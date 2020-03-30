@@ -1,0 +1,199 @@
+
+
+
+https://13.104.26.52/redfish/v1/Systems/1
+
+{
+    "@odata.context": "/redfish/v1/$metadata#Systems/Members/$entity",
+    "@odata.id": "/redfish/v1/Systems/1",
+    "@odata.type": "#ComputerSystem.v1_2_0.ComputerSystem",
+    "Id": "1",
+    "Name": "Computer System",
+    "AssetTag": null,
+    "Manufacturer": "Huawei",
+    "Model": "2288H V5",
+    "SerialNumber": "2102311TYK10JC000062",
+    "UUID": "FEE0454E-CCBB-997B-E811-2FF6287B76A8",
+    "HostName": null,
+    "PartNumber": "02311TYK",
+    "HostingRole": [
+        "ApplicationServer"
+    ],
+    "Status": {
+        "State": "Enabled",
+        "Health": "OK"
+    },
+    "PowerState": "On",
+    "Boot": {
+        "BootSourceOverrideTarget": "Hdd",
+        "BootSourceOverrideEnabled": "Once",
+        "BootSourceOverrideMode": "Legacy",
+        "BootSourceOverrideTarget@Redfish.AllowableValues": [
+            "None",
+            "Pxe",
+            "Floppy",
+            "Cd",
+            "Hdd",
+            "BiosSetup"
+        ]
+    },
+    "TrustedModules": null,
+    "BiosVersion": "0.95",
+    "ProcessorSummary": {
+        "Count": 2,
+        "Model": "Central Processor",
+        "Status": {
+            "HealthRollup": "OK"
+        }
+    },
+    "MemorySummary": {
+        "TotalSystemMemoryGiB": 256,
+        "Status": {
+            "HealthRollup": "OK"
+        }
+    },
+    "Processors": {
+        "@odata.id": "/redfish/v1/Systems/1/Processors"
+    },
+    "Memory": {
+        "@odata.id": "/redfish/v1/Systems/1/Memory"
+    },
+    "EthernetInterfaces": {
+        "@odata.id": "/redfish/v1/Systems/1/EthernetInterfaces"
+    },
+    "Storage": {
+        "@odata.id": "/redfish/v1/Systems/1/Storages"
+    },
+    "NetworkInterfaces": {
+        "@odata.id": "/redfish/v1/Systems/1/NetworkInterfaces"
+    },
+    "LogServices": {
+        "@odata.id": "/redfish/v1/Systems/1/LogServices"
+    },
+    "PCIeDevices": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/1/PCIeDevices/PCIeCard1"
+        }
+    ],
+    "PCIeFunctions": [
+        {
+            "@odata.id": "/redfish/v1/Chassis/1/PCIeDevices/PCIeCard1/Functions/1"
+        }
+    ],
+    "Bios": {
+        "@odata.id": "/redfish/v1/Systems/1/Bios"
+    },
+    "Links": {
+        "Chassis": [
+            {
+                "@odata.id": "/redfish/v1/Chassis/1"
+            }
+        ],
+        "Managers": [
+            {
+                "@odata.id": "/redfish/v1/Managers/1"
+            }
+        ]
+    },
+    "Oem": {
+        "Huawei": {
+            "OSVersion": null,
+            "KernalVersion": null,
+            "MajorOSVersion": null,
+            "MinorOSVersion": null,
+            "MajorPatchVersion": null,
+            "MinorPatchVersion": null,
+            "DomainName": null,
+            "HostDescription": null,
+            "iBMAService": null,
+            "iBMARunningStatus": null,
+            "iBMADriver": null,
+            "NetBandwidthThresholdPercent": 100,
+            "LocalKvmEnabled": true,
+            "PartitionLists": [],
+            "CPUUsagePercent": 5,
+            "MemoryUsagePercent": 5,
+            "CPUThresholdPercent": 100,
+            "MemoryThresholdPercent": 100,
+            "HardDiskThresholdPercent": 100,
+            "CPUPowerAdjustment": {
+                "CPUPLimit": 15,
+                "CPUTLimit": 14,
+                "CPUPState": 0,
+                "CPUTState": 0
+            },
+            "SafePowerOffTimeoutEnabled": false,
+            "SafePowerOffTimoutSeconds": 600,
+            "SafePowerOffDefaultTimeoutSeconds": 600,
+            "SafePowerOffMaxTimeoutSeconds": 6000,
+            "SafePowerOffMinTimeoutSeconds": 10,
+            "PanelPowerButtonEnabled": true,
+            "PowerOnStrategy": "TurnOn",
+            "SlotWidth": null,
+            "ProductAlias": "2288H V5 10GE SFP+",
+            "ProductVersion": "V5",
+            "ProductName": "2288H V5",
+            "DeviceOwnerID": "2102311TYK10JC000062",
+            "DeviceSlotID": 0,
+            "SwitchIpInfo": {
+                "Base": null,
+                "Fabric": null,
+                "FC": null
+            },
+            "PchModel": "LBG QS/PRQ - 2 - S1",
+            "StorageSummary": {
+                "Count": 1,
+                "Status": {
+                    "HealthRollup": "OK"
+                }
+            },
+            "LogicalDriveSummary": {
+                "Count": 23,
+                "Status": {
+                    "HealthRollup": "OK"
+                }
+            },
+            "StorageSubsystemSummary": {
+                "Status": {
+                    "HealthRollup": "OK"
+                }
+            },
+            "BootModeConfigOverIpmiEnabled": true,
+            "InfiniBandInterfaces": {
+                "@odata.id": "/redfish/v1/Systems/1/InfiniBandInterfaces"
+            },
+            "NetworkBondings": {
+                "@odata.id": "/redfish/v1/Systems/1/NetworkBondings"
+            },
+            "ProcessorView": {
+                "@odata.id": "/redfish/v1/Systems/1/ProcessorView"
+            },
+            "MemoryView": {
+                "@odata.id": "/redfish/v1/Systems/1/MemoryView"
+            },
+            "ProcessorsHistoryUsageRate": {
+                "@odata.id": "/redfish/v1/Systems/1/ProcessorsHistoryUsageRate"
+            },
+            "MemoryHistoryUsageRate": {
+                "@odata.id": "/redfish/v1/Systems/1/MemoryHistoryUsageRate"
+            },
+            "NetworkHistoryUsageRate": {
+                "@odata.id": "/redfish/v1/Systems/1/NetworkHistoryUsageRate"
+            }
+        }
+    },
+    "Actions": {
+        "#ComputerSystem.Reset": {
+            "target": "/redfish/v1/Systems/1/Actions/ComputerSystem.Reset",
+            "@Redfish.ActionInfo": "/redfish/v1/Systems/1/ResetActionInfo"
+        },
+        "Oem": {
+            "Huawei": {
+                "#ComputerSystem.FruControl": {
+                    "target": "/redfish/v1/Systems/1/Actions/Oem/Huawei/ComputerSystem.FruControl",
+                    "@Redfish.ActionInfo": "/redfish/v1/Systems/1/FruControlActionInfo"
+                }
+            }
+        }
+    }
+}
