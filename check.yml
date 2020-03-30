@@ -1,6 +1,6 @@
 ---
 - hosts: all
-  become: true
+  # become: true
   vars_files:
     - vars.yml  
   tasks:
@@ -27,7 +27,7 @@
           - item.name in services
           - services[item.name].state == item.status
         fail_msg: "{{ item.name }} is not in status {{ item.status }}" 
-        succee_msg: "{{ item.name }} is in status {{ item.status }}" 
+        msg: "{{ item.name }} is in status {{ item.status }}" 
       vars:
         services: "{{ services_state.ansible_facts.services }}"
       ignore_errors: true
