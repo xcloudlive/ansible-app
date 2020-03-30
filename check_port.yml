@@ -1,29 +1,32 @@
 ---
-- hosts: all
+- hosts: localhost
   # become: true
   vars_files:
     - vars.yml  
   tasks:
     - name: Check if port is listening
       block:
-        - name: hello
+        - name: do checking
           wait_for:
             port: "{{ item.name }}"
-            delay: 0
+            delay: 1
             timeout: 10
             msg: "Timeout waiting for {{ item.name }} to respond"
           register: port_check
-          ignore_errors: yes
+          # ignore_errors: yes
           with_items: "{{ check_port }}"
+        
       rescue:
         - debug:  
-            msg: this a error is happened
-          var:
-            result: error
+            msg: "error is happened {{result}}"
+        - set_fact:
+            result: failed
+      
       always:
-        - fail: 
-            msg: error is happed
-          when: result == "error"
+        - name: always to check result
+          fail: 
+            msg: error is happened
+          when: result == "failed"
         
     
     

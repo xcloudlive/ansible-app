@@ -13,12 +13,17 @@
       register: hosts
       delegate_to: localhost  
 
+    # - name: test url
+    #   debug:
+    #     var: info_url
+    #   with_items: "{{ hosts.list }}"
+
     - name: loop to call redfish rest service
       include_role:
         name: audit
       with_items: "{{ hosts.list }}"
       loop_control:
         loop_var: item
-      # ignore_errors: yes
+      ignore_errors: yes
 
     
