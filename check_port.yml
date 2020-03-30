@@ -18,8 +18,8 @@
       rescue:
         - debug:  
             msg: this a error is happened
-          # var:
-          #   result: error
+          var:
+            result: error
       always:
         - fail: 
             msg: error is happed
