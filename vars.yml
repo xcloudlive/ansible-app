@@ -7,3 +7,8 @@ service_list:
     status: stopped
   - name: firewalld.service
     status: running
+url_list:
+  - url: https://jsonplaceholder.typicode.com/users
+    status: 200
+  - url: https://jsonplaceholder.typicode.com/users
+    status: 200
