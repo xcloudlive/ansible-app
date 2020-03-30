@@ -4,13 +4,26 @@
   vars_files:
     - vars.yml  
   tasks:
-    - name: Check if port is listening
-      wait_for:
-        port: "{{ item.name }}"
-        delay: 5
-        timeout: 10
-        msg: "Timeout waiting for {{ item.name }} to respond"
-      register: port_check
-      ignore_errors: yes
-      with_items: "{{ check_port }}"
+    block:
+      - name: Check if port is listening
+        wait_for:
+          port: "{{ item.name }}"
+          delay: 5
+          timeout: 10
+          msg: "Timeout waiting for {{ item.name }} to respond"
+        register: port_check
+        ignore_errors: yes
+        with_items: "{{ check_port }}"
+    rescue:
+      - name: register
+        debug: 
+          msg: "error is happed"
+        var:
+          result: error
+    always:
+      fail: 
+        msg: error is happed
+        when: result == "error"
+        
+    
     
