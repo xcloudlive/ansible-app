@@ -23,7 +23,7 @@
     always:
       fail: 
         msg: error is happed
-        when: result == "error"
+      when: result == "error"
         
     
     
