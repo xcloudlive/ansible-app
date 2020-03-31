@@ -23,7 +23,7 @@
             status_code: "{{ item.status }}"
           register: this
           with_items: "{{ url_list }}"
-          failed_when: "{{ item.content }} not in this.content"
+          failed_when: "item.content not in this.content"
       rescue:
         - set_fact:
             result: failed
