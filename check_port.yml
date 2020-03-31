@@ -9,8 +9,8 @@
         - name: do checking
           wait_for:
             port: "{{ item.name }}"
-            delay: 1
-            timeout: 10
+            delay: 0
+            timeout: 5
             msg: "Timeout waiting for {{ item.name }} to respond"
           register: port_check
           # ignore_errors: yes
@@ -27,6 +27,8 @@
           fail: 
             msg: error is happened
           when: result == "failed"
-        
+    - name:  
+      debug:
+        msg: all is ok
     
     

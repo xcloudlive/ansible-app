@@ -7,9 +7,9 @@
             msg: 'I execute normally'
         - name: "i force a failure"
           command: /bin/false
-          loop:
-            - hello
-            - world
+          # loop:
+          #   - hello
+          #   - world
           # ignore_errors: yes
         - debug:
             msg: 'I never execute, due to the above task failing, :-('
