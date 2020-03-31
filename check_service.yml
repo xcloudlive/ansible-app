@@ -3,7 +3,7 @@
   vars:
     service_list:
       - name: netconsole
-        status: stopped
+        status: running
       - name: firewalld.service
         status: running
     result: ok
