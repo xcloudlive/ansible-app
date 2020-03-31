@@ -17,6 +17,7 @@
             # password: passwd
             # force_basic_auth: yes
             return_content: yes
+            timeout: 10
             status_code: "{{ item.status }}"
           register: jsoncontent
           with_items: "{{ url_list }}"
