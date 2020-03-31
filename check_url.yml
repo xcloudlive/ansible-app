@@ -1,9 +1,10 @@
 ---
-- hosts: all
+- hosts: localhost
   vars:
     url_list:
       - url: https://jsonplaceholder.typicode.com/users
         status: 200
+        content: mail
       - url: https://jsonplaceholder.typicode.com/users
         status: 200
     result: ok
@@ -22,6 +23,22 @@
           register: content
           with_items: "{{ url_list }}"
           delegate_to: localhost
+          when: item.content is not defined
+        
+        - name: send url request and also check return content
+          uri:
+            url: "{{ item.url }}"
+            # username: user
+            # password: passwd
+            # force_basic_auth: yes
+            return_content: yes
+            timeout: 10
+            status_code: "{{ item.status }}"
+          register: this
+          with_items: "{{ url_list }}"
+          failed_when: "item.content not in this.content"
+          delegate_to: localhost
+          when: item.content is defined
       rescue:
         - set_fact:
             result: failed
