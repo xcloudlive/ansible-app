@@ -1,0 +1,5 @@
+[webserver]
+web_server_1
+web_server_2
+[webserver:vars]
+username=system
