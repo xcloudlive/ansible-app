@@ -21,12 +21,16 @@
             msg: "error is happened {{result}}"
         - set_fact:
             result: failed
-      
-      always:
-        - name: always to check result
-          fail: 
+        - fail: 
             msg: error is happened
           when: result == "failed"
+        - name:  
+          debug:
+            msg: never run
+      always:
+        - name: always to check result
+          debug:
+            msg: all is finished  
     - name:  
       fail: 
         msg: error is happened
