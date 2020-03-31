@@ -21,6 +21,7 @@
             status_code: "{{ item.status }}"
           register: content
           with_items: "{{ url_list }}"
+          delegate_to: localhost
       rescue:
         - set_fact:
             result: failed

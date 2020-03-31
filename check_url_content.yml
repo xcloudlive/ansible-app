@@ -24,6 +24,7 @@
           register: this
           with_items: "{{ url_list }}"
           failed_when: "item.content not in this.content"
+          delegate_to: localhost
       rescue:
         - set_fact:
             result: failed
