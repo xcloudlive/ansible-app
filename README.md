@@ -37,6 +37,23 @@
 ### block
 该处是任务的循环体，参考：https://docs.ansible.com/ansible/latest/user_guide/playbooks_blocks.html
 ### rescue
-任务循环中异常处理，设置result为failed
+任务循环中异常处理
+```
+        - set_fact:
+            result: failed
+```
+设置result为failed
+```
+        - fail: 
+            msg: error is happened
+          when: result == "failed"  
+```
+抛出异常
+```
+        - name:  
+          debug:
+            msg: 'I also never execute :-('
+```            
+该语句正常情况下，不会执行
 ### always
-任务最终执行结果，打印
+任务最终执行结果，正常打印：all tasks are finished, result is ok；错误的时候打印：all tasks are finished, result is failed
