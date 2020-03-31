@@ -1,8 +1,4 @@
 host_addr: hello
 
-url_list:
-  - url: https://jsonplaceholder.typicode.com/users
-    status: 200
-  - url: https://jsonplaceholder.typicode.com/users
-    status: 200
+
 info_url: https://{{item.ip}}/redfish/v1/Systems/1

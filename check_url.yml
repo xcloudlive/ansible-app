@@ -1,15 +1,33 @@
 ---
 - hosts: all
-  # become: true
-  vars_files:
-    - vars.yml   # tasks file for audit
+  vars:
+    url_list:
+      - url: https://jsonplaceholder.typicode.com/users
+        status: 200
+      - url: https://jsonplaceholder.typicode.com/users
+        status: 200
+    result: ok
   tasks:
-    - name: check url 
-      uri:
-        url: "{{ item.url }}"
-        # username: user
-        # password: passwd
-        # force_basic_auth: yes
-        return_content: yes
-      register: jsoncontent
-      with_items: "{{ url_list }}"
+    block:
+      - name: check url 
+        uri:
+          url: "{{ item.url }}"
+          # username: user
+          # password: passwd
+          # force_basic_auth: yes
+          return_content: yes
+        register: jsoncontent
+        with_items: "{{ url_list }}"
+    rescue:
+      - set_fact:
+          result: failed
+      - fail: 
+          msg: error is happened
+        when: result == "failed"
+      - name:  
+        debug:
+          msg: 'I also never execute :-('
+    always:
+      - name: always to check result
+        debug:
+          msg: "all tasks are finished, result is {{ result }}"          
