@@ -1,24 +1,20 @@
 ---
-- hosts: localhost
-  # become: true
-  vars_files:
-    - vars.yml  
+- hosts: all
+  vars:
+    check_port:
+      - 8080
+      - 80
+    result: ok
   tasks:
     - name: Check if port is listening
       block:
-        - name: do checking
+        - name: do checking....
           wait_for:
-            port: "{{ item.name }}"
-            delay: 0
+            port: "{{ item }}"
             timeout: 5
-            msg: "Timeout waiting for {{ item.name }} to respond"
-          register: port_check
-          # ignore_errors: yes
-          with_items: "{{ check_port }}"
-        
+            msg: "Timeout waiting for {{ item }} to respond"
+          loop: "{{ check_port }}"
       rescue:
-        - debug:  
-            msg: "error is happened {{result}}"
         - set_fact:
             result: failed
         - fail: 
@@ -26,16 +22,8 @@
           when: result == "failed"
         - name:  
           debug:
-            msg: never run
+            msg: 'I also never execute :-('
       always:
         - name: always to check result
           debug:
-            msg: all is finished  
-    - name:  
-      fail: 
-        msg: error is happened
-      when: result == "failed"
-
-    - name:  
-      debug:
-        msg: all is ok
+            msg: "all is finished, result is {{ result }}"  
