@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   vars:
     url_list:
       - url: https://jsonplaceholder.typicode.com/users
