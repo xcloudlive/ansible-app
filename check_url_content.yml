@@ -4,8 +4,10 @@
     url_list:
       - url: https://jsonplaceholder.typicode.com/users
         status: 200
+        content: "something"
       - url: https://jsonplaceholder.typicode.com/users
         status: 200
+        content: "otherthing"
     result: ok
   tasks:
     - name: check url 
@@ -19,8 +21,9 @@
             return_content: yes
             timeout: 10
             status_code: "{{ item.status }}"
-          register: content
+          register: this
           with_items: "{{ url_list }}"
+          failed_when: "{{ item.content }} not in this.content"
       rescue:
         - set_fact:
             result: failed
