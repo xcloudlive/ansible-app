@@ -28,7 +28,10 @@
             msg: error is happened
           when: result == "failed"
     - name:  
+      fail: 
+        msg: error is happened
+      when: result == "failed"
+
+    - name:  
       debug:
         msg: all is ok
-    
-    
