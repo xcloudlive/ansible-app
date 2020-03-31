@@ -1,5 +1,5 @@
 ### vars
-变量名：check_port，以列表形式列出需要坚持的端口
+变量名：check_port，以列表形式列出需要检查的端口
 ### tasks
 ```
     - name: Gathering service facts
