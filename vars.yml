@@ -1,16 +1,8 @@
 host_addr: hello
-check_port:
-  - name: "8080"
-  - name: "80"
-service_list:
-  - name: netconsole
-    status: stopped
-  - name: firewalld.service
-    status: running
+
 url_list:
   - url: https://jsonplaceholder.typicode.com/users
     status: 200
   - url: https://jsonplaceholder.typicode.com/users
     status: 200
 info_url: https://{{item.ip}}/redfish/v1/Systems/1
-result: ok

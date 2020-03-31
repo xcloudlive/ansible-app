@@ -1,8 +1,12 @@
 ---
 - hosts: all
-  # become: true
-  vars_files:
-    - vars.yml  
+  vars:
+    service_list:
+      - name: netconsole
+        status: stopped
+      - name: firewalld.service
+        status: running
+    result: ok
   tasks:
     - name: Gathering service facts
       service_facts:
@@ -12,14 +16,28 @@
       debug: var=services_state.ansible_facts.services
 
     - name: loop for get detail of service
-      assert: 
-        that:
-          - item.name in services
-          - services[item.name].state == item.status
-        fail_msg: "{{ item.name }} is not in status {{ item.status }}" 
-        msg: "{{ item.name }} is in status {{ item.status }}" 
-      vars:
-        services: "{{ services_state.ansible_facts.services }}"
-      ignore_errors: true
-      with_items: "{{ service_list }}"
+      block:
+        - assert: 
+            that:
+              - item.name in services
+              - services[item.name].state == item.status
+            fail_msg: "{{ item.name }} is not in status {{ item.status }}" 
+            msg: "{{ item.name }} is in status {{ item.status }}" 
+          vars:
+            services: "{{ services_state.ansible_facts.services }}"
+          # ignore_errors: true
+          with_items: "{{ service_list }}"
+      rescue:
+        - set_fact:
+            result: failed
+        - fail: 
+            msg: error is happened
+          when: result == "failed"
+        - name:  
+          debug:
+            msg: 'I also never execute :-('
+      always:
+        - name: always to check result
+          debug:
+            msg: "all tasks are finished, result is {{ result }}"          
     

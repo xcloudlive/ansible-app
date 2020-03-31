@@ -26,4 +26,4 @@
       always:
         - name: always to check result
           debug:
-            msg: "all is finished, result is {{ result }}"  
+            msg: "all tasks are finished, result is {{ result }}"  
