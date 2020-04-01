@@ -1,4 +1,2 @@
 host_addr: hello
-
-
 info_url: https://{{item.ip}}/redfish/v1/Systems/1
