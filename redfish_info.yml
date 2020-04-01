@@ -1,6 +1,6 @@
 ---
 - name: check server health based on redfish rest service
-  hosts: localhost
+  hosts: all
   gather_facts: no
   vars:
     result: ok
@@ -9,7 +9,7 @@
       block:
         - debug:
             var: inventory_hostname
-            
+
         - name: do checking....
           uri:
             url: "http://{{ inventory_hostname }}:5000/redfish/v1/Systems/1"
