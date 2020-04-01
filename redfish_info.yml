@@ -13,12 +13,12 @@
         - name: do checking....
           uri:
             url: "http://{{ inventory_hostname }}:5000/redfish/v1/Systems/1"
-            # username: user
-            # password: passwd
-            # force_basic_auth: yes
+            url_username: "{{ username }}"
+            url_password: "{{ password }}"
+            force_basic_auth: yes
             return_content: yes
             timeout: 10
-            status_code: 200
+            # status_code: 200
           register: contents
           delegate_to: localhost
         # - debug: var=contents
