@@ -57,3 +57,11 @@
 该语句正常情况下，不会执行
 ### always
 任务最终执行结果，正常打印：all tasks are finished, result is ok；错误的时候打印：all tasks are finished, result is failed
+
+## vault
+> The --ask-vault-pass and --vault-password-file options can be used as long as only a single password is needed for any given run.
+
+> ansible-vault encrypt --vault-id @prompt secret_conditonal.yml
+
+https://dev.iachieved.it/iachievedit/ansible-vault-ids/
+https://learn.redhat.com/t5/Automation-Management-Ansible/Vault-IDs-in-Ansible-2-4/td-p/1531

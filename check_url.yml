@@ -1,5 +1,7 @@
 ---
-- hosts: localhost
+- name: loop to check url is corrected
+  hosts: localhost
+  gather_facts: no
   vars:
     url_list:
       - url: https://jsonplaceholder.typicode.com/users

@@ -1,5 +1,7 @@
 ---
-- hosts: all
+- name: loop to check service status
+  hosts: all
+  gather_facts: no
   vars:
     service_list:
       - name: netconsole
