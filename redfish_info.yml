@@ -1,6 +1,6 @@
 ---
 - name: check server health based on redfish rest service
-  hosts: all
+  hosts: localhost
   gather_facts: no
   vars:
     result: ok
@@ -8,10 +8,11 @@
     - name: Check if server is health
       block:
         - debug:
-          var: hostvars[inventory_hostname]
+            var: inventory_hostname
+            
         - name: do checking....
           uri:
-            url: "http://{{ hostvars[inventory_hostname] }}:5000/redfish/v1/Systems/1"
+            url: "http://{{ inventory_hostname }}:5000/redfish/v1/Systems/1"
             # username: user
             # password: passwd
             # force_basic_auth: yes
