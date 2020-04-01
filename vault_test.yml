@@ -1,0 +1,8 @@
+---
+- name: test vault 
+  hosts: webserver
+  gather_facts: false
+  tasks:
+    - name: run debug
+      debug:
+        msg: "{{username}} is {{password}}"
