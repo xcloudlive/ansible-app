@@ -13,11 +13,12 @@
         - name: do checking....
           uri:
             url: "http://{{ inventory_hostname }}:5000/redfish/v1/Systems/1"
+            # refer to group_vars/huawei_redfish.yml
             url_username: "{{ username }}"
             url_password: "{{ password }}"
             force_basic_auth: yes
             return_content: yes
-            timeout: 10
+            timeout: 5
             status_code: 200
           register: contents
           delegate_to: localhost
